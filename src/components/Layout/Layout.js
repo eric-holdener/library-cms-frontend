@@ -2,10 +2,12 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 
 export default function Layout() {
-  <div>
-    <Header />
+  return (
     <div>
-      <Outlet />
+      <Header />
+      <div>
+        <Outlet />
+      </div>
     </div>
-  </div>
+  )
 }
