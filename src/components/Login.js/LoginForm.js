@@ -5,14 +5,18 @@ export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleSubmit() {
-    axios.post("api/users/login", {
+  function handleSubmit(e) {
+    e.preventDefault();
+    axios.post("users/sign_in", {
       user: {
         email: email,
         password: password
       }
     })
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res);
+        console.log(res.headers);
+      })
       .catch(error => console.log(error))
   }
 
