@@ -4,6 +4,7 @@ import { useContext } from "react";
 
 export default function AuthChecker(props) {
   const { loggedInUser } = useContext(UserContext);
+
   if (!loggedInUser) {
     return (
       <Navigate to="/login"/>

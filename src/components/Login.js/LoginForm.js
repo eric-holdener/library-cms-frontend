@@ -1,30 +1,30 @@
 import axios from "axios";
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { UserContext } from "../../contexts/UserContext";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
 
   function handleSubmit(e) {
     e.preventDefault();
-    axios.post("users/sign_in", {
+    let config = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+
+    let data = {
       user: {
         email: email,
         password: password
       }
-    })
-      .then(res => {
-        console.log(res);
-        console.log(res.headers);
-      })
+    }
+    axios.post("users/sign_in", data, config)
+      .then(res => setLoggedInUser(res.headers.authorization))
       .catch(error => console.log(error))
   }
-
-  function logger() {
-    console.log(email);
-    console.log(password);
-  }
-
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -38,7 +38,6 @@ export default function LoginForm() {
         </label>
         <input type="submit" value="Log in" />
       </form>
-      <button onClick={logger}>Console.log</button>
     </>
 
   )
