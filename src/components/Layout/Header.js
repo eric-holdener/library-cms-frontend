@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
-  const { loggedInUser, setLoggedInUser } = useContext(UserContext)
+  const { loggedInUser, setLoggedInUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   function signOut() {
     setLoggedInUser(null);
+    navigate("/");
   }
 
   return (
